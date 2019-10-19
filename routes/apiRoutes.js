@@ -10,7 +10,6 @@ var cheerio = require("cheerio");
 module.exports = function (app) {
   // Get all examples
   app.get("/api/articles", function (req, res) {
-    console.log("---------------------------------------")
     var aList = []
 
     // First, we grab the body of the html with axios
@@ -72,8 +71,6 @@ module.exports = function (app) {
       .then(function (dbArticle) {
         var data = dbArticle;  
         res.render("index", data)
-        // If we were able to successfully find Articles, send them back to the client
-        // res.json(dbArticle);
       })
       .catch(function (err) {
         // If an error occurred, send it to the client
@@ -81,12 +78,71 @@ module.exports = function (app) {
       });
   });
 
-  // Delete an example by id
+
+  // Route for grabbing a specific Article by id, populate it with it's note
+app.get("/api/articles/:id", function(req, res) {
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  db.Article.findOne({ _id: req.params.id })
+    // ..and populate all of the notes associated with it
+    .populate("note")
+    .then(function(dbArticle) {
+      // If we were able to successfully find an Article with the given id, send it back to the client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
+// Route for retrieving all Notes from the db
+app.get("/api/notes/:id", function(req, res) {
+  // Find all Notes
+  db.Note.find({_id: req.params.id })
+    .then(function(dbNote) {
+      // If all Notes are successfully found, send them back to the client
+      res.json(dbNote);
+    })
+    .catch(function(err) {
+      // If an error occurs, send the error back to the client
+      res.json(err);
+    });
+});
+
+
+
+  app.post("/api/notes/:id", function (req, res) {
+  // Create a new note and pass the req.body to the entry
+  db.Note.create(req.body)
+    .then(function(dbNote) { // Since our mongoose query returns a promise, we can chain another `.then` which receives the result of the query
+      return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+    })
+    .then(function(dbArticle) {
+      // If we were able to successfully update an Article, send it back to the client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+  });
+
+  // Delete an Article by id
   app.delete("/api/articles/:id", function(req, res) {
-    console.log(">MMMMMMMMMMMMMMMMMMMMMM")
     db.Article.remove({"_id": req.params.id}).then(function(dbArticle) {
       res.json(dbArticle);
     });
+  });
+
+  // Delete an example by id
+  app.delete("/api/note/:id", function(req, res) {
+    console.log("NNNNNNNNNNNNNN ", req.params.id)
+    db.Note.findByIdAndDelete(req.params.id).then(function(dbNote) {
+
+      res.json(dbNote);
+    }).catch(function(error){
+      console.log(error)
+    })
   });
 };
 
