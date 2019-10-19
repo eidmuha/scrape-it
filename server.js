@@ -6,7 +6,7 @@ var mongoose = require("mongoose");
 // Require all models
 var db = require("./models");
 
-var PORT = 37418;
+var PORT = process.env.PORT || 37418;
 
 // Initialize Express
 var app = express();
