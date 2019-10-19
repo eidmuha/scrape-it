@@ -82,11 +82,12 @@ module.exports = function (app) {
   });
 
   // Delete an example by id
-  // app.delete("/api/examples/:id", function(req, res) {
-  //   db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-  //     res.json(dbExample);
-  //   });
-  // });
+  app.delete("/api/articles/:id", function(req, res) {
+    console.log(">MMMMMMMMMMMMMMMMMMMMMM")
+    db.Article.remove({"_id": req.params.id}).then(function(dbArticle) {
+      res.json(dbArticle);
+    });
+  });
 };
 
 

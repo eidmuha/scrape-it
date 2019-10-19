@@ -64,19 +64,6 @@ $(document).on("click", "#saveArticle", function () {
     });
 });
 
-// $(document).on("click", "#savedBtn", function (event) {
-//   event.preventDefault()
-  
-//   $.ajax({
-//     url: "api/savedarticles",
-//     type: "GET"
-//   }).then(function (data) {
-//     location.reload();
-//   })
-  
-// });
-
-
 
 // scrap articles
 $scrapItBtn.on("click", handleScrapeBtn);

@@ -3,10 +3,6 @@ var exphbs = require("express-handlebars");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
-
-
-
-
 // Require all models
 var db = require("./models");
 
@@ -29,8 +25,14 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
-// Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/scrapeit", { useNewUrlParser: true });
+// If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://admin:123abc@ds153841.mlab.com:53841/heroku_5g6cw4tk";
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
+
+// // Connect to the Mongo DB
+// mongoose.connect("mongodb://localhost/scrapeit", { useNewUrlParser: true });
 
 // Routes
 require("./routes/apiRoutes")(app);

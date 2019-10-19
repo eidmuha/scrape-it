@@ -36,22 +36,33 @@
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2">Dashboard - Scraping Articles</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group mr-2">
-                <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>&nbsp &nbsp
-                <a href="#" id="scrapeit" class="btn btn-success float-right">Scrape</a>
-              </div>
-            </div>
+            <h1 class="h2">Dashboard - Saved Articles</h1>
 
           </div>
-          <marquee behavior="scroll" direction="left">HTML scrolling text... </marquee>
-          <hr>
-          <!-- <canvas class="my-4" id="myChart" width="900" height="380"></canvas> -->
 
-
-          <div id="cardholder"></div>
+          <div id="cardholder">
+              {{#each articles}}
+                <div class="card" data-id={{_id}}>
+                        <div class="card-header text-white bg-primary">
+                            <span>
+                            <b> {{title}}</b>
+                            <button class="btn btn-success btn-sm  float-right" id ="delSavedArticle" data-id={{_id}}>Delete</button>                            
+                            &nbsp &nbsp
+                            <button class="btn btn-success btn-sm  float-right" id ="saveArticle" data-id={{_id}}>Notes</button>                            
+                            </span>                             
+                        </div>
+                        <div class="card-body m-0 p-0 row">
+                        <div class="col-sm-8">  
+                          <p>{{description}}</p>
+                        </div>
+                            <div class="col-sm-4">
+                              <img src={{image}} alt={{title}} width="100px" class="img-thumbnail float-right" />
+                            </div>   
+                        </div>
+                    </div>
+                    <br>
+              {{/each}}
+          </div>
           
         </main>
       </div>
@@ -72,4 +83,4 @@
     </script>
     <script
   src="https://code.jquery.com/jquery-3.4.1.js"  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
-    <script src="./js/index.js"></script>
+    <script src="./js/savedArticles.js"></script>
