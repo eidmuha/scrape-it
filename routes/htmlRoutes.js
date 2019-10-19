@@ -2,19 +2,10 @@ var db = require("../models");
 
 module.exports = function(app) {
   // Load index page
-  app.get("/", function(req, res) {
-    // Find all Users
-    db.Article.find({})
-    .then(function(dbArticle) {
+  app.get("/", function(req, res) {    
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", req.body)
       // If all Users are successfully found, send them back to the client
-      res.render("index", {
-        article: dbArticle
-      });
-    })
-    .catch(function(err) {
-      // If an error occurs, send the error back to the client
-      res.json(err);
-    });      
+      res.render("index");    
   });
 
   // Load example page and pass in an example by id

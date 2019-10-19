@@ -1,8 +1,11 @@
-
-
+{{#each result}}
+        {{!-- <p>-------- {{result.title}}</p>           --}}
+            {{!-- {{> cards/card}} --}} 
+          
+       
 <div class="card">
     <div class="card-header text-white bg-primary">
-        <span><b> {{title}}</b></span>
+        <span><b> {{result.title}}</b></span>
         
 
     </div>
@@ -11,3 +14,6 @@
 
     </div>
 </div>
+
+
+ {{/each}}

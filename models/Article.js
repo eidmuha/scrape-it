@@ -20,7 +20,7 @@ var ArticleSchema = new Schema({
     type: String,
     required: true
   },
-  description: {
+  image: {
     type: String,
     required: true
   },

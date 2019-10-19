@@ -3,7 +3,7 @@
       <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Saved Articles</a>
+          <a class="nav-link" href="api/savedarticles">Saved Articles</a>
         </li>
       </ul>
     </nav>
@@ -50,8 +50,8 @@
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group mr-2">
                 <button class="btn btn-sm btn-outline-secondary">Share</button>
-                <button class="btn btn-sm btn-outline-secondary">Export</button>
-                <a href="#" id="scrapeit" class="btn btn-success float-right">Save</a>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>&nbsp &nbsp
+                <a href="#" id="scrapeit" class="btn btn-success float-right">Scrape</a>
               </div>
             </div>
 
@@ -61,13 +61,8 @@
           <!-- <canvas class="my-4" id="myChart" width="900" height="380"></canvas> -->
 
           <h2>Scraped Articles</h2>
-        {{!--  --}}
 
-        {{#each dbArticle}}
-        <p>-------- {{dbArticle}}</p>          
-            {{!-- {{> cards/card}} --}}
-          
-        {{/each}}
+          <div id="cardholder"></div>
           
         </main>
       </div>
